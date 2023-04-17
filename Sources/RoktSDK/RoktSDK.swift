@@ -1,10 +1,24 @@
+import Foundation
+
 public struct RoktSDK {
     
-    public init() {}
+    public enum PrestoredError: Error {
+        case invalidServiceResponse
+    }
+    
+    public func getPrestoredNums(url: URL) async throws -> [Int]? {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200 else {
+                throw PrestoredError.invalidServiceResponse
+            }
+        return try JSONDecoder().decode([Int].self, from: data)
+    }
     
     public func average(nums: [Int]) -> Int {
 
         var total = 0.0
+        //use the parameter-array instead of the global variable votes
         for vote in nums{
             total += Double(vote)
         }
@@ -24,4 +38,5 @@ public struct RoktSDK {
         return (sumOfNums, avgOfNums)
         
     }
+
 }
