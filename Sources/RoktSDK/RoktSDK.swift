@@ -1,5 +1,5 @@
 public struct RoktSDK {
-    
+    public init() {}
     public func average(nums: [Int]) -> Int {
 
         var total = 0.0
