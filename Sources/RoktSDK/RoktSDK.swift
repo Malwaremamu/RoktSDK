@@ -4,11 +4,13 @@ public struct RoktSDK {
     
     public init() {}
     
+    public var url = URL(string: "https://roktcdn1.akamaized.net/store/test/android/prestored.json")
+    
     public enum PrestoredError: Error {
         case invalidServiceResponse
     }
     
-    public func getPrestoredNums(url: URL) async throws -> [Int]? {
+    public func getPrestoredNums() async throws -> [Int]? {
         let (data, response) = try await URLSession.shared.data(from: url)
         guard let httpResponse = response as? HTTPURLResponse,
                 httpResponse.statusCode == 200 else {
