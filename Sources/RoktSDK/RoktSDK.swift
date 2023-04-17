@@ -2,6 +2,8 @@ import Foundation
 
 public struct RoktSDK {
     
+    public init() {}
+    
     public enum PrestoredError: Error {
         case invalidServiceResponse
     }
