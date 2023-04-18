@@ -10,6 +10,7 @@ public struct RoktSDK {
         case invalidServiceResponse
     }
     
+//     Async call for the web service to return a array of integers
     public func getPrestoredNums() async throws -> [Int]? {
         let (data, response) = try await URLSession.shared.data(from: url)
         guard let httpResponse = response as? HTTPURLResponse,
@@ -19,6 +20,7 @@ public struct RoktSDK {
         return try JSONDecoder().decode([Int].self, from: data)
     }
     
+//     Calculating the average for array of integers
     public func average(nums: [Int]) -> Int {
 
         var total = 0.0
@@ -36,6 +38,7 @@ public struct RoktSDK {
         }
     }
     
+//     Calculating the average and sum for array of integers
     public func updateLabels(_ updatedList: [Int]?) -> (sumOfNums: Int?, avgOfNums: Int?) {
         let sumOfNums = updatedList?.reduce(0, +)
         let  avgOfNums =  average(nums: updatedList ?? [])
